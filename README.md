@@ -5,11 +5,10 @@ Clone this repository and from the project root run:
 ./mvnw clean quarkus:dev
 ```
 
-Sometimes it will compile successfully, sometimes it will give NPE due to kafkaStreams being null 
-on class StreamMonitor, statement `var metrics = kafkaStreams.metrics();`.
+Sometimes it will compile successfully and start the application OK, othertimes it will give NPE due to kafkaStreams being null on class StreamMonitor, statement `var metrics = kafkaStreams.metrics();`.
 
 Seems that sometimes KafkaStream instance is not injected at the correct time. Don't know if this 
-is some CDI expected behaviour or is a bug.  
+is some CDI expected behaviour or is just a bug.  
 
 # quarkus-kafka-streams-issue project
 
