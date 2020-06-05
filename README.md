@@ -1,2 +1,43 @@
-# quarkus-kafka-stream-issue
-This is an issue I've encountered when using Quarkus kafka-stream extension
+# Reproduce issue
+
+Clone this repository and from the project root run:
+```
+./mvnw clean quarkus:dev
+```
+
+Sometimes it will compile successfully, sometimes it will give NPE due to kafkaStreams being null 
+on class StreamMonitor, statement `var metrics = kafkaStreams.metrics();`.
+
+Seems that sometimes KafkaStream instance is not injected at the correct time. Don't know if this 
+is some CDI expected behaviour or is a bug.  
+
+# quarkus-kafka-streams-issue project
+
+This project uses Quarkus, the Supersonic Subatomic Java Framework.
+
+If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+
+## Running the application in dev mode
+
+You can run your application in dev mode that enables live coding using:
+```
+./mvnw quarkus:dev
+```
+
+## Packaging and running the application
+
+The application can be packaged using `./mvnw package`.
+It produces the `quarkus-kafka-streams-issue-1.0-SNAPSHOT-runner.jar` file in the `/target` directory.
+Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/lib` directory.
+
+The application is now runnable using `java -jar target/quarkus-kafka-streams-issue-1.0-SNAPSHOT-runner.jar`.
+
+## Creating a native executable
+
+You can create a native executable using: `./mvnw package -Pnative`.
+
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using: `./mvnw package -Pnative -Dquarkus.native.container-build=true`.
+
+You can then execute your native executable with: `./target/quarkus-kafka-streams-issue-1.0-SNAPSHOT-runner`
+
+If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image.
